@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wj.Interface.Mapper.CountMapper">
+    <select id="selectCount" resultType="com.wj.model.Count" parameterType="java.lang.String" >
+        select *  from count where name = #{name}
+    </select>
+    <select id="selectManyCount" resultType="com.wj.model.Count" parameterType="java.lang.String">
+        select * from count where name=#{name}
+    </select>
+    <select id="selectCountByLike" parameterType="java.lang.String" resultType="com.wj.model.Count">
+        select * from count where count.name like   concat('%','${name}','%')
+    </select>
+    <select id="returnMapByname" parameterType="com.wj.model.Count" resultType="java.util.HashMap">
+        select * from count where name=#{name}
+    </select>
+    <resultMap id="baseResult" type="com.wj.model.Count">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="phone" column="phone"/>
+        <result property="address" column="address"/>
+    </resultMap>
+    <select id="returnListCount" parameterType="com.wj.model.Count" resultMap="baseResult">
+        select * from count where name=#{name}
+    </select>
+    <insert id="insertCount" parameterType="com.wj.model.Count">
+        insert into count (`name`, `age`, `phone`, `address`) values (#{name},#{age},#{phone},#{address});
+    </insert>
+    <delete id="deleteCount" parameterType="java.lang.String">
+        delete from count where name=#{name}
+    </delete>
+    <update id="updateCount" parameterType="com.wj.model.Count">
+       update count set name=#{name},age=#{age},phone=#{phone},address=#{address} where name=#{name}
+    </update>
+    
+</mapper>
