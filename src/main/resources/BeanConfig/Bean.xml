@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+<!--     1、 构造函数的注入,构造函数的参数个数必须与constructor-arg个数一致-->
+     <bean id="count" class="com.wjm.model.Count" scope="prototype">
+         <constructor-arg name="name" value="张三"/>
+         <constructor-arg name="age" value="24"/>
+         <constructor-arg name="date" ref="now"/>
+     </bean>
+    <bean id="now" class="java.util.Date"/>
+<!--    2、set方法注入,必须要有默认的构造方法和实体类中的set方法-->
+   <bean id="count2" class="com.wjm.model.Count">
+       <property name="name" value="李四"/>
+       <property name="age" value="20"/>
+       <property name="date" ref="now"/>
+   </bean>
+<!--    集合数据依靠set方式注入-->
+    <bean id="countList" class="com.wjm.model.CountList">
+        <property name="name" value="王五"/>
+        <property name="age" value="22"/>
+        <property name="myList">
+            <list>
+                <value>AAA</value>
+                <value>BBB</value>
+                <value>CCC</value>
+            </list>
+        </property>
+        <property name="starr">
+            <array>
+                <value>字符串1</value>
+                <value>字符串2</value>
+                <value>字符串3</value>
+            </array>
+        </property>
+        <property name="date" ref="now"/>
+        <property name="myMap">
+            <map>
+                <entry key="键1" value="值1"/>
+                <entry key="键2" value="值2"/>
+                <entry key="键3" value="值3"/>
+            </map>
+        </property>
+        <property name="myProps">
+            <props>
+                <prop key="prop1">prop值1</prop>
+                <prop key="prop2">prop值2</prop>
+                <prop key="prop3">prop值3</prop>
+            </props>
+        </property>
+    </bean>
+</beans>
